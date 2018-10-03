@@ -138,7 +138,7 @@ class Cad_stock_Detail(DetailView,UpdateView):
     form_class = Cad_stock_insumo_Form
     template_name = 'cadastroCostos/cad_stock_Detail.html'
 
-    """SLUG PRUEBA"""
+    """SOME CHANGE"""
 
 
 

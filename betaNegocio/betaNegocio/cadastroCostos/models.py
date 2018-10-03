@@ -18,10 +18,6 @@ class Cad_un_med(models.Model):
         next_codigo = Cad_un_med.objects.all().aggregate(Max('un_med_insumo'))
         return next_codigo['un_med_insumo__max'] + 1
 
-    def getChoices(*args):
-        choices = Cad_un_med.objects.all()
-        return choices
-
 
 class Cad_insumos(models.Model):
 
@@ -38,16 +34,8 @@ class Cad_insumos(models.Model):
         return self.nombre_insumo
 
     def get_nextCodigo(*args):
-        print("DEBUUUU")
         next_codigo = Cad_insumos.objects.all().aggregate(Max('cod_insumo'))
-        print (next_codigo['cod_insumo__max'])
-        print("DEBUUUU")
-        if (next_codigo['cod_insumo__max']) == None:
-            return 1
-        else:
-            return (next_codigo['cod_insumo__max']) + 1
-
-
+        return next_codigo['cod_insumo__max'] + 1
 
 
 

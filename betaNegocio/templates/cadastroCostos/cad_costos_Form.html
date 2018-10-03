@@ -1,0 +1,140 @@
+{% extends 'base/base.html' %}
+
+{% block SUBTITLE %}
+    Salida de Stock
+{%endblock%}
+{% block searchList %}
+{% endblock %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <table>{{ form.as_table }}</table>
+
+    <br>
+
+    <h2><br>Estado de Stock<br></h2>
+    <table>{{ form2.as_table }}</table>
+    <br>
+
+    <button id="GuardarSalida" type="submit" class="btn btn-primary">Guardar</button>
+    {% block cancelar %}
+        <a id="someIDA" class = "btn btn-secondary" href="{% url 'betaNegocio:cad_costos_listar' %}">Cancelar</a>
+    {% endblock %}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button id="BajaTotal" type="submit" class="btn btn-primary btn-lg">Baja Total</button>
+
+
+</form>
+
+{% endblock %}
+
+{% block scripts%}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script>
+     $( document ).ready(function() {
+
+        $('#id_cod_insumo_salida').val($("#id_cod_insumo").val());
+        $('#id_precio_costo').val($("#id_precio_unitario").val());
+        $('#id_modo_pago_c').val($("#id_modo_pago_m").val());
+
+        $("#id_cod_insumo_salida").attr("disabled","disabled")
+        $("#id_precio_costo").attr("disabled","disabled")
+        $("#id_valor_costo").attr("disabled","disabled")
+        $("#id_modo_pago_c").attr("disabled","disabled")
+
+
+        $("#id_cod_insumo").attr("disabled","disabled")
+        $("#id_fec_movimiento").attr("disabled","disabled")
+        $("#id_num_veces").attr("disabled","disabled")
+        $("#id_cantidad_mov").attr("disabled","disabled")
+        $("#id_precio_unitario").attr("disabled","disabled")
+        $("#id_valor_insumo").attr("disabled","disabled")
+        $("#id_ind_ing_sal").attr("disabled","disabled")
+        $("#id_modo_pago_m").attr("disabled","disabled")
+
+        var cantidad_costo = $("#id_cantidad_costo");
+        var cantidad_mov = $("#id_cantidad_mov");
+        var candidad_mov_valor = $("#id_cantidad_mov").val();
+        console.log("Yeagdssds")
+        console.log(candidad_mov_valor)
+
+        var precio_unitario = $("#id_precio_unitario");
+
+        (cantidad_costo).bind('keyup change',function(){
+            var total=isNaN(parseInt(cantidad_costo.val()* $("#id_precio_unitario").val())) ? 0 :(cantidad_costo.val()* $("#id_precio_unitario").val())
+            $("#id_valor_costo").val(total);
+            $('#id_cantidad_mov').val(candidad_mov_valor - $("#id_cantidad_costo").val());
+            var total2=isNaN(parseInt(cantidad_mov.val()* $("#id_precio_unitario").val())) ? 0 :(cantidad_mov.val()* $("#id_precio_unitario").val())
+            console.log("YEAHIN222");
+            $("#id_valor_insumo").val(total2);
+
+
+        });
+
+
+
+
+
+
+
+
+     	console.log("OKOKOK");
+     	var loc = window.location.href
+        if (loc.toLowerCase().search('editar') >=0 ){
+            console.log("Si Hay cadenas");
+            $("#id_cod_insumo").attr("disabled","disabled")
+            $("#id_fec_movimiento").attr("disabled","disabled")
+            $("#id_num_veces").attr("disabled","disabled")
+        }
+
+        else{
+            console.log("NOHAYCADENASd");
+        }
+     	$.fn.select2.defaults.set( "theme", "bootstrap" );
+        $.fn.select2.defaults.set( "width", "auto" );
+        $.fn.select2.defaults.set( "placeholder", "Seleccione" );
+        $.fn.select2.defaults.set( "selectOnClose", "true" );
+        $('.js-example-basic-single').select2();
+
+
+    });
+
+
+
+    $('#GuardarSalida').on('click', function() {
+        console.log("pasoasosoaoso")
+        if (($("#id_cantidad_mov").val() <= 0) || ($("#id_cantidad_costo").val() <= 0)){
+            alert('Cantidad de Costo no permitida');
+            event.preventDefault();
+            location.reload();
+        };
+
+
+    });
+
+    $('Form').submit(function() {
+        $("#id_cod_insumo_salida").removeAttr("disabled","disabled")
+        $("#id_precio_costo").removeAttr("disabled","disabled")
+        $("#id_valor_costo").removeAttr("disabled","disabled")
+        $("#id_modo_pago_c").removeAttr("disabled","disabled")
+
+
+
+
+
+
+        $("#id_cod_insumo").removeAttr("disabled","disabled")
+        $("#id_fec_movimiento").removeAttr("disabled","disabled")
+        $("#id_num_veces").removeAttr("disabled","disabled")
+        $("#id_cantidad_mov").removeAttr("disabled","disabled")
+        $("#id_precio_unitario").removeAttr("disabled","disabled")
+        $("#id_valor_insumo").removeAttr("disabled","disabled")
+        $("#id_ind_ing_sal").removeAttr("disabled","disabled")
+        $("#id_modo_pago_m").removeAttr("disabled","disabled")
+
+        console.log("HERErerer")
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+
+{% block SUBTITLE %}
+    Unidad de Medida
+{%endblock%}
+{% block searchList %}
+{% endblock %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <table>{{ form.as_table }}</table>
+
+    <br>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    {% block cancelar %}
+        <a id="someIDA" class = "btn btn-secondary" href="{% url 'betaNegocio:cad_un_med_listar' %}">Cancelar</a>
+    {% endblock %}
+
+</form>
+
+{% endblock %}
+
+{% block scripts%}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+    $( document ).ready(function() {
+     console.log( "ready!" );
+
+    });
+  </script>
+{% endblock %}

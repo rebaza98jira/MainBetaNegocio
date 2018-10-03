@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+{% block Title%}
+    Baja Total
+{% endblock %}
+{% block searchList %}
+{% endblock %}
+{% block SUBTITLE %}
+    Baja Total
+{%endblock%}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+
+
+
+    <h3>¿Desea eliminar el registro de {{ cad_stock.cod_insumo.nombre_insumo}} con Codigo = {{cad_stock.id }}?</h3>
+    <button class="btn btn-danger" type="submit">Si, eliminar</button>
+    <a class = "btn btn-primary" href="{% url 'betaNegocio:cad_stock_listar' %}">Cancelar</a>
+
+</form>
+
+{% endblock %}

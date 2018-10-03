@@ -1,0 +1,19 @@
+{% extends 'base/base.html' %}
+{% block Title%}
+    Unidad Delete
+{% endblock %}
+{% block searchList %}
+{% endblock %}
+{% block SUBTITLE %}
+    Unidad de Medida
+{%endblock%}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <h3>¿Desea eliminar el registro de {{ cad_un_med.descripcion }} con Codigo = {{cad_un_med.un_med_insumo }}?</h3>
+    <button class="btn btn-danger" type="submit">Si, eliminar</button>
+    <a class = "btn btn-primary" href="{% url 'betaNegocio:cad_un_med_listar' %}">Cancelar</a>
+
+</form>
+
+{% endblock %}

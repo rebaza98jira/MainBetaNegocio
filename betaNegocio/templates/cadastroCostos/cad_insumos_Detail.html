@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+
+{% block SUBTITLE %}
+    Insumo
+{%endblock%}
+{% block searchList %}
+{% endblock %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <div id="formdiv">
+        <table>{{ form.as_table }}</table>
+    </div>
+    <br>
+    <a class="btn btn-primary" href="{% url 'betaNegocio:cad_insumos_editar' cad_insumos.cod_insumo %}">Editar</a>
+    <a class="btn btn-danger" href="{% url 'betaNegocio:cad_insumos_eliminar' cad_insumos.cod_insumo %}">Eliminar</a>
+    {% block cancelar %}
+        <a id="someIDA" class = "btn btn-secondary" href="{% url 'betaNegocio:cad_insumos_listar' %}">Cancelar</a>
+    {% endblock %}
+
+</form>
+
+{% endblock %}
+{% block scripts%}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+    $( document ).ready(function() {
+         var loc = window.location.href;
+         $("#formdiv").find("*").prop("disabled", true);
+     });
+  </script>
+{% endblock %}

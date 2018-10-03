@@ -79,11 +79,11 @@ WSGI_APPLICATION = 'betaNegocio.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'betaNegocio',
-        'USER': 'postgres',
-        'PASSWORD': 'Dexter123',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': 'yajcqkqa',
+        'USER': 'yajcqkqa',
+        'PASSWORD': 'Dgvl3_F_UPacyfKDqztNxR0rPWoAfR6W',
+        'HOST': 'pellefant.db.elephantsql.com',
+        'PORT': '',
     }
 }
 

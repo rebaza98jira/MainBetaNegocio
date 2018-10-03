@@ -29,7 +29,6 @@ class Cad_un_med_Form(forms.ModelForm):
         self.fields['un_med_insumo'].initial = Cad_un_med.get_nextCodigo()
         print("DEBUG VECESN STOCK")
         print(datetime.now())
-        print(Cad_stock.getnextNum_veces(datetime.now()))
 
 
 
@@ -56,7 +55,7 @@ class Cad_insumos_Form(forms.ModelForm):
         widgets = {
             'cod_insumo': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px', 'readonly':'True'}),
             'nombre_insumo': forms.TextInput(attrs={'class': 'form-control', 'maxlength': '50', 'style': 'width:auto'}),
-            'un_med_insumo': forms.Select(attrs={'class': 'form-control', 'style': 'width:auto'}, choices=Cad_un_med.objects.all()),
+            'un_med_insumo': forms.Select(attrs={'class': 'form-control', 'style': 'width:auto'}, choices=Cad_un_med.getChoices()),
             'fecha_cadastro': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         }
 

@@ -60,7 +60,7 @@ class Cad_stock(models.Model):
     ind_ing_sal_CHOICES = (('I', 'Ingreso'),('S', 'Salida'))
     ind_ing_sal = models.CharField(max_length=1, choices= ind_ing_sal_CHOICES, default = 'I')
     modo_pago_m_CHOICES = (('E', 'Efectivo'), ('T', 'Tarjeta'))
-    """CAMBIO A LAS 12:29 PERU 2"""
+    """CAMBIO A LAS 17:42 PERU 2"""
     """CONFIRMAR SI DEFAULT DE MODO DE PAGO SERA EFECTIVO"""
     modo_pago_m = models.CharField(max_length=1, choices= modo_pago_m_CHOICES, default= 'E')
 
@@ -109,14 +109,15 @@ class Cad_ing_ret(models.Model):
 class Cad_costos(models.Model):
     fecha_trabajo =  models.DateField(default=datetime.now)
     cod_insumo = models.ForeignKey(Cad_insumos, null=False, blank=False, on_delete=models.CASCADE)
+    modo_pago_c_CHOICES = (('E', 'Efectivo'), ('T', 'Tarjeta'))
+    modo_pago_c = models.CharField(max_length=1, choices=modo_pago_c_CHOICES)
     cantidad_costo = models.DecimalField(max_digits=8, decimal_places=2)
     precio_costo = models.DecimalField(max_digits=12, decimal_places=4)
     valor_costo = models.CharField(max_length=8)
-    modo_pago_c_CHOICES = (('E', 'Efectivo'), ('T', 'Tarjeta'))
-    modo_pago_c = models.CharField(max_length=1, choices=modo_pago_c_CHOICES)
 
     class Meta:
-        unique_together = ["fecha_trabajo", "cod_insumo"]
+        # unique_together = ["fecha_trabajo", "cod_insumo"]
+        unique_together = ["fecha_trabajo", "cod_insumo", "modo_pago_c"]
 
 class Cad_V_mesas(models.Model):
     fecha_trabajo = models.DateField()

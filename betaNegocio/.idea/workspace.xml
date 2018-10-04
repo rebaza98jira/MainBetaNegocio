@@ -2,24 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="17ade8ee-cc54-4e3f-8f84-dfde52c5ccdc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/betaNegocio.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/betaNegocio.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/cadastroCostos/cad_costos_Form.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cadastroCostos/cad_costos_Form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/cadastroCostos/cad_costos_List.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cadastroCostos/cad_costos_List.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/cadastroCostos/cad_insumos_Detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cadastroCostos/cad_insumos_Detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/cadastroCostos/cad_insumos_Form.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cadastroCostos/cad_insumos_Form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/cadastroCostos/cad_insumos_List.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cadastroCostos/cad_insumos_List.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/cadastroCostos/cad_stock_Detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cadastroCostos/cad_stock_Detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/betaNegocio/cadastroCostos/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/betaNegocio/cadastroCostos/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/betaNegocio/cadastroCostos/migrations/0002_auto_20180927_2122.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/betaNegocio/cadastroCostos/migrations/0003_auto_20181003_1935.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/betaNegocio/cadastroCostos/migrations/0004_auto_20181004_0041.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/betaNegocio/cadastroCostos/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/betaNegocio/cadastroCostos/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/betaNegocio/cadastroCostos/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/betaNegocio/cadastroCostos/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/cadastroCostos/cad_stock_Form.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cadastroCostos/cad_stock_Form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/cadastroCostos/cad_stock_List.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cadastroCostos/cad_stock_List.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/cadastroCostos/cad_stock_detalle_insumo_Detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cadastroCostos/cad_stock_detalle_insumo_Detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/cadastroCostos/cad_stock_insumo_List.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cadastroCostos/cad_stock_insumo_List.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/cadastroCostos/cad_un_med_Detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cadastroCostos/cad_un_med_Detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/cadastroCostos/cad_un_med_Form.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cadastroCostos/cad_un_med_Form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/cadastroCostos/cad_un_med_List.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cadastroCostos/cad_un_med_List.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -121,25 +111,25 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="105" />
-          <entry key="py" value="8" />
+          <entry key="py" value="644" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="105" />
-          <entry key="Python" value="8" />
+          <entry key="Python" value="644" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="html" value="23" />
-          <entry key="py" value="3" />
+          <entry key="html" value="24" />
+          <entry key="py" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="23" />
-          <entry key="Python" value="3" />
+          <entry key="HTML" value="24" />
+          <entry key="Python" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -147,92 +137,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/cadastroCostos/cad_stock_Form.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/cadastroCostos/cad_stock_Form_Editar.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="133" selection-start-line="4" selection-start-column="133" selection-end-line="4" selection-end-column="133" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/cadastroCostos/cad_stock_insumo_List.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="423">
-              <caret line="57" selection-start-line="57" selection-end-line="57" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/cadastroCostos/cad_stock_List.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="61" selection-start-line="61" selection-end-line="61" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/cadastroCostos/cad_un_med_Delete.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="14" lean-forward="true" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/cadastroCostos/cad_un_med_Detail.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" selection-start-line="24" selection-end-line="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/cadastroCostos/cad_un_med_Form.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/cadastroCostos/cad_un_med_List.html">
+        <entry file="file://$PROJECT_DIR$/betaNegocio/cadastroCostos/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="39" selection-start-line="39" selection-end-line="39" />
+            <state relative-caret-position="298">
+              <caret line="62" column="25" selection-start-line="62" selection-start-column="25" selection-end-line="62" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/cadastroCostos/cad_stock_Detail.html">
+        <entry file="file://$PROJECT_DIR$/betaNegocio/cadastroCostos/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="433">
-              <caret line="57" selection-start-line="57" selection-end-line="57" />
+            <state relative-caret-position="315">
+              <caret line="162" column="25" selection-start-line="162" selection-start-column="13" selection-end-line="162" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/cadastroCostos/cad_stock_detalle_insumo_Detail.html">
+        <entry file="file://$PROJECT_DIR$/betaNegocio/cadastroCostos/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" selection-start-line="28" selection-end-line="28" />
+            <state relative-caret-position="259">
+              <caret line="220" column="26" selection-start-line="220" selection-start-column="26" selection-end-line="220" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#72#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -262,7 +198,6 @@
       <find>cad_stock_detalle</find>
       <find>cad_stock_listar_insumo</find>
       <find>cad_stock_detalle_insumo</find>
-      <find>Cad_stock_Create</find>
       <find>cad_stock_crear_ingreso</find>
       <find>supe</find>
       <find>&amp;</find>
@@ -270,7 +205,6 @@
       <find>print</find>
       <find>cad_stock_eliminat</find>
       <find>true</find>
-      <find>filter</find>
       <find>getnextNum_veces</find>
       <find>username</find>
       <find>VECESN</find>
@@ -278,6 +212,9 @@
       <find>cad_stock_detalle_insumo_DetailCad_stock_Detail_Movimiento</find>
       <find>Cad_stock_Detail_Movimiento</find>
       <find>Cad_stock_Form</find>
+      <find>Cad_stock_Create</find>
+      <find>cad_stock_Form</find>
+      <find>filter</find>
     </findStrings>
     <replaceStrings>
       <replace>Cad_un_med_List</replace>
@@ -300,10 +237,7 @@
         <option value="$PROJECT_DIR$/betaNegocio/urls.py" />
         <option value="$PROJECT_DIR$/templates/cadastroCostos/cad_stock_Form_Editar.html" />
         <option value="$PROJECT_DIR$/templates/cadastroCostos/cad_stock_Delete.html" />
-        <option value="$PROJECT_DIR$/betaNegocio/settings.py" />
         <option value="$PROJECT_DIR$/betaNegocio/cadastroCostos/urls.py" />
-        <option value="$PROJECT_DIR$/betaNegocio/cadastroCostos/views.py" />
-        <option value="$PROJECT_DIR$/betaNegocio/cadastroCostos/models.py" />
         <option value="$PROJECT_DIR$/betaNegocio/cadastroCostos/forms.py" />
         <option value="$PROJECT_DIR$/templates/cadastroCostos/cad_insumos_Detail.html" />
         <option value="$PROJECT_DIR$/templates/base/base.html" />
@@ -313,12 +247,15 @@
         <option value="$PROJECT_DIR$/templates/cadastroCostos/cad_insumos_List.html" />
         <option value="$PROJECT_DIR$/templates/cadastroCostos/cad_stock_Detail.html" />
         <option value="$PROJECT_DIR$/templates/cadastroCostos/cad_stock_detalle_insumo_Detail.html" />
-        <option value="$PROJECT_DIR$/templates/cadastroCostos/cad_stock_Form.html" />
         <option value="$PROJECT_DIR$/templates/cadastroCostos/cad_stock_insumo_List.html" />
         <option value="$PROJECT_DIR$/templates/cadastroCostos/cad_stock_List.html" />
         <option value="$PROJECT_DIR$/templates/cadastroCostos/cad_un_med_Detail.html" />
         <option value="$PROJECT_DIR$/templates/cadastroCostos/cad_un_med_Form.html" />
         <option value="$PROJECT_DIR$/templates/cadastroCostos/cad_un_med_List.html" />
+        <option value="$PROJECT_DIR$/templates/cadastroCostos/cad_stock_Form.html" />
+        <option value="$PROJECT_DIR$/betaNegocio/settings.py" />
+        <option value="$PROJECT_DIR$/betaNegocio/cadastroCostos/views.py" />
+        <option value="$PROJECT_DIR$/betaNegocio/cadastroCostos/models.py" />
       </list>
     </option>
   </component>
@@ -350,23 +287,6 @@
               <item name="betaNegocio" type="b2602c69:ProjectViewProjectNode" />
               <item name="betaNegocio" type="462c0819:PsiDirectoryNode" />
               <item name="betaNegocio" type="462c0819:PsiDirectoryNode" />
-              <item name="cadastroCostos" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="betaNegocio" type="b2602c69:ProjectViewProjectNode" />
-              <item name="betaNegocio" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="betaNegocio" type="b2602c69:ProjectViewProjectNode" />
-              <item name="betaNegocio" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="base" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="betaNegocio" type="b2602c69:ProjectViewProjectNode" />
-              <item name="betaNegocio" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="cadastroCostos" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -410,7 +330,7 @@
     <frame x="67" y="25" width="1533" height="875" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24966888" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13311258" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Messages" />
@@ -489,57 +409,10 @@
     <entry file="file://$PROJECT_DIR$/betaNegocio/cadastroCostos/apps.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/betaNegocio/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="783">
-          <caret line="87" column="32" lean-forward="true" selection-start-line="87" selection-start-column="32" selection-end-line="87" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/betaNegocio/cadastroCostos/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="62" column="35" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/betaNegocio/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="24" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/betaNegocio/cadastroCostos/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="20" column="71" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="71" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/betaNegocio/cadastroCostos/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="154" column="33" selection-start-line="154" selection-start-column="6" selection-end-line="154" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#72#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/betaNegocio/cadastroCostos/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1271">
-          <caret line="61" column="109" selection-start-line="61" selection-start-column="109" selection-end-line="61" selection-end-column="109" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -613,13 +486,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/cadastroCostos/cad_stock_Form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/cadastroCostos/cad_stock_Form_Editar.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -666,6 +532,60 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="39" selection-start-line="39" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/betaNegocio/cadastroCostos/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="17" column="45" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/betaNegocio/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="523">
+          <caret line="91" column="25" selection-start-line="91" selection-start-column="9" selection-end-line="91" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/cadastroCostos/cad_stock_Form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/betaNegocio/cadastroCostos/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="162" column="25" selection-start-line="162" selection-start-column="13" selection-end-line="162" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/betaNegocio/cadastroCostos/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="220" column="26" selection-start-line="220" selection-start-column="26" selection-end-line="220" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#72#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/betaNegocio/cadastroCostos/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="62" column="25" selection-start-line="62" selection-start-column="25" selection-end-line="62" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

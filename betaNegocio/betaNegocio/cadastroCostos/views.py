@@ -183,6 +183,7 @@ class Cad_costos_Create(CreateView,UpdateView):
     template_name = 'cadastroCostos/cad_costos_Form.html'
     success_url = reverse_lazy('betaNegocio:cad_stock_listar')
 
+
     def get_context_data(self, **kwargs):
         context = super(Cad_costos_Create, self).get_context_data(**kwargs)
         pk = self.kwargs.get('pk',0)
@@ -200,17 +201,33 @@ class Cad_costos_Create(CreateView,UpdateView):
 
         stock = self.model.objects.get(id=id_stock)
 
-        form = self.form_class(request.POST)
-        form2 = self.second_form_class(request.POST, instance=stock)
-        print("THIS IS AHONTER DEBUGGGGGGGGG")
-        print(form2)
+        form = self.form_class(request.POST.copy())
+
+        print("THIS IS AHONTER DEBUGGGGGGGGG0000000")
+        print(form)
+        print(form['fecha_trabajo'].value())
+        print(form['cod_insumo'].value())
+        print(form['modo_pago_c'].value())
+        print(form['cantidad_costo'].value())
+        print(form['precio_costo'].value())
+        print(form['valor_costo'].value())
+
+        # print(form.data['fecha_trabajo'])
+        try:
+            costo = self.second_model.objects.all().filter(fecha_trabajo=form['fecha_trabajo'].value(), cod_insumo= form['cod_insumo'].value(),modo_pago_c='E').values('cantidad_costo','valor_costo' ).get()
+        except:
+            costo = None
+        # costo = self.second_model.objects.all().filter(fecha_trabajo=form['fecha_trabajo'].value(), cod_insumo= form['cod_insumo'].value(),modo_pago_c=form['modo_pago_c'].value()).values('cantidad_costo','valor_costo' ).get()
+        print("AFTER QUERY")
+        print((costo['cantidad_costo']))
+        print((costo['valor_costo']))
+        print(form.get('modo_pago_c'))
 
         if form.is_valid() and form2.is_valid():
             form.save()
             form2.save()
             return HttpResponseRedirect(self.get_success_url())
-        else:
-            return HttpResponseRedirect(self.get_success_url())
+
 
 
 

@@ -62,6 +62,7 @@ class Cad_stock(models.Model):
     modo_pago_m_CHOICES = (('E', 'Efectivo'), ('T', 'Tarjeta'))
     """CAMBIO A LAS 17:42 PERU 2"""
     """CAMBIO A LAS 17:51 PERU 2"""
+    """CAMBIO A LAS 17:56 PERU 2"""
     """CONFIRMAR SI DEFAULT DE MODO DE PAGO SERA EFECTIVO"""
     modo_pago_m = models.CharField(max_length=1, choices= modo_pago_m_CHOICES, default= 'E')
 

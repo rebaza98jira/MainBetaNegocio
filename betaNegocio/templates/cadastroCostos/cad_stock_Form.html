@@ -45,6 +45,50 @@
         });
 
 
+         $("#id_cod_insumo").change(function(){
+            console.log( $(this).val() );
+            var cod_insumo = $(this).val();
+            var fec_movimiento = $("#id_fec_movimiento").val();
+            $.ajax({
+                url: 'ajax/valida_siguente_vez_fecha/',
+                data: {
+                    'fec_movimiento': fec_movimiento,
+                    'cod_insumo': cod_insumo
+
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log("funciono OMG")
+                    console.log(data.numveces)
+                    $("#id_num_veces").val(data.numveces);
+                }
+            });
+
+        });
+
+        $("#id_fec_movimiento").change(function(){
+            console.log( $(this).val() );
+            var fec_movimiento = $(this).val();
+            var cod_insumo = $("#id_cod_insumo").val();
+            $.ajax({
+                url: 'ajax/valida_siguente_vez_fecha/',
+                data: {
+                    'fec_movimiento': fec_movimiento,
+                    'cod_insumo': cod_insumo
+
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log("funciono OMG")
+                    console.log(data.numveces)
+                    $("#id_num_veces").val(data.numveces);
+
+                }
+            });
+
+        });
+
+
 
 
 

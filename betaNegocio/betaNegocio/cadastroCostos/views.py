@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
 from .models import Cad_un_med, Cad_insumos, Cad_stock, Cad_costos
 from django.db.models import Sum, F, ExpressionWrapper, Max
@@ -213,3 +213,17 @@ class Cad_costos_Create(CreateView,UpdateView):
             return HttpResponseRedirect(self.get_success_url())
 
 
+
+def valida_siguente_vez_fecha(request):
+    fec_movimiento = request.GET.get('fec_movimiento', None)
+    cod_insumo = request.GET.get('cod_insumo', None)
+    print ("DEBUG AJAXEC")
+    print(fec_movimiento)
+    print(cod_insumo)
+
+    data = {
+        'numveces': Cad_stock.get_numveces_Fecha(fec_movimiento,cod_insumo)
+    }
+    print("DEBUG AJAXDATA")
+    print (data)
+    return JsonResponse(data)

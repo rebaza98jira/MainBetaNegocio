@@ -29,7 +29,7 @@ class Cad_un_med_Form(forms.ModelForm):
         self.fields['un_med_insumo'].initial = Cad_un_med.get_nextCodigo()
         print("DEBUG VECESN STOCK")
         print(datetime.now())
-        print(Cad_stock.getnextNum_veces(datetime.now()))
+        # print(Cad_stock.getnextNum_veces(datetime.now()))
 
 
 
@@ -39,7 +39,10 @@ class Cad_un_med_Form(forms.ModelForm):
 class Cad_insumos_Form(forms.ModelForm):
 
     class Meta:
+
+
         model = Cad_insumos
+
 
         fields = [
             'cod_insumo',
@@ -56,13 +59,14 @@ class Cad_insumos_Form(forms.ModelForm):
         widgets = {
             'cod_insumo': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px', 'readonly':'True'}),
             'nombre_insumo': forms.TextInput(attrs={'class': 'form-control', 'maxlength': '50', 'style': 'width:auto'}),
-            'un_med_insumo': forms.Select(attrs={'class': 'form-control', 'style': 'width:auto'}, choices=Cad_un_med.objects.all()),
+            'un_med_insumo': forms.Select(attrs={'class': 'js-example-basic-single', 'style': 'width:auto'}),
             'fecha_cadastro': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         }
 
     def __init__(self, *args, **kwargs):
         super(Cad_insumos_Form, self).__init__(*args, **kwargs)
         self.fields['cod_insumo'].initial = Cad_insumos.get_nextCodigo()
+        self.fields['un_med_insumo'].initial =  Cad_un_med.objects.all().values('descripcion')
 
 
 
@@ -93,7 +97,7 @@ class Cad_stock_Form(forms.ModelForm):
             'modo_pago_m': 'Modo de Pago',
         }
         widgets = {
-            'cod_insumo': forms.Select(attrs={'class': 'js-example-basic-single', 'style': 'width:auto'}, choices=Cad_insumos.objects.all()),
+            'cod_insumo': forms.Select(attrs={'class': 'js-example-basic-single', 'style': 'width:auto'}),
             'fec_movimiento': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'num_veces': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px'}),
             'cantidad_mov': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px'}),
@@ -133,7 +137,7 @@ class Cad_stock_insumo_Form(forms.ModelForm):
             # 'modo_pago_m': 'Modo de Pago',
         }
         widgets = {
-            'cod_insumo': forms.Select(attrs={'class': 'js-example-basic-single', 'style': 'width:100px', 'type':'text', 'name':'q', 'value':'{{ request.GET.q }}'}, choices=Cad_insumos.objects.all()),
+            'cod_insumo': forms.Select(attrs={'class': 'js-example-basic-single', 'style': 'width:100px', 'type':'text', 'name':'q', 'value':'{{ request.GET.q }}'}),
             # 'nombre_insumo' :forms.CharField(attrs={'class': 'form-control', 'style': 'width:100px'}),
             # 'fec_movimiento': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             # 'num_veces': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px'}),

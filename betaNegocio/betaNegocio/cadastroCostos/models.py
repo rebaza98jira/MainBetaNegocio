@@ -16,7 +16,13 @@ class Cad_un_med(models.Model):
 
     def get_nextCodigo(*args ):
         next_codigo = Cad_un_med.objects.all().aggregate(Max('un_med_insumo'))
-        return next_codigo['un_med_insumo__max'] + 1
+        print(next_codigo['un_med_insumo__max'])
+        if next_codigo['un_med_insumo__max'] == None:
+            return 1
+        else:
+            return next_codigo['un_med_insumo__max'] + 1
+
+
 
 
 class Cad_insumos(models.Model):
@@ -35,7 +41,12 @@ class Cad_insumos(models.Model):
 
     def get_nextCodigo(*args):
         next_codigo = Cad_insumos.objects.all().aggregate(Max('cod_insumo'))
-        return next_codigo['cod_insumo__max'] + 1
+        print (next_codigo['cod_insumo__max'])
+        if next_codigo['cod_insumo__max'] == None:
+            return 1
+        else:
+            return next_codigo['cod_insumo__max'] + 1
+        # return next_codigo['cod_insumo__max'] + 1
 
 
 
@@ -47,9 +58,29 @@ class Cad_stock(models.Model):
     precio_unitario = models.DecimalField(max_digits=12, decimal_places=4)
     valor_insumo = models.DecimalField(max_digits=12, decimal_places=4)
     ind_ing_sal_CHOICES = (('I', 'Ingreso'),('S', 'Salida'))
-    ind_ing_sal = models.CharField(max_length=1, choices= ind_ing_sal_CHOICES)
+    ind_ing_sal = models.CharField(max_length=1, choices= ind_ing_sal_CHOICES, default = 'I')
     modo_pago_m_CHOICES = (('E', 'Efectivo'), ('T', 'Tarjeta'))
-    modo_pago_m = models.CharField(max_length=1, choices= modo_pago_m_CHOICES)
+
+    """CONFIRMAR SI DEFAULT DE MODO DE PAGO SERA EFECTIVO"""
+    modo_pago_m = models.CharField(max_length=1, choices= modo_pago_m_CHOICES, default= 'E')
+
+    def get_numveces_Fecha(fecha,codigo):
+        print(fecha)
+        print(type(fecha))
+        print(codigo)
+        print(type(codigo))
+        # data =  Cad_stock.objects.filter(fec_movimiento=fecha, cod_insumo=codigo).exists()
+        if str(fecha)=="" or str(codigo)=="":
+            return 1
+
+        next_numveces = Cad_stock.objects.filter(fec_movimiento=fecha, cod_insumo=codigo).aggregate(Max('num_veces'))
+
+        if next_numveces['num_veces__max'] == None:
+            return 1
+        else:
+            return next_numveces['num_veces__max'] + 1
+
+
 
     class Meta:
         unique_together = ["cod_insumo", "fec_movimiento", "num_veces"]

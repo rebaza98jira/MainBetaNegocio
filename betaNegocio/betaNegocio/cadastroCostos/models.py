@@ -60,7 +60,7 @@ class Cad_stock(models.Model):
     ind_ing_sal_CHOICES = (('I', 'Ingreso'),('S', 'Salida'))
     ind_ing_sal = models.CharField(max_length=1, choices= ind_ing_sal_CHOICES, default = 'I')
     modo_pago_m_CHOICES = (('E', 'Efectivo'), ('T', 'Tarjeta'))
-    """CAMBIO A LAS 9:33AM PERU 2"""
+    """CAMBIO A LAS 12:29 PERU 2"""
     """CONFIRMAR SI DEFAULT DE MODO DE PAGO SERA EFECTIVO"""
     modo_pago_m = models.CharField(max_length=1, choices= modo_pago_m_CHOICES, default= 'E')
 

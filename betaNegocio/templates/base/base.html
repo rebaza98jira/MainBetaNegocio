@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>{% block title %}BASE TEMPLATE{% endblock %}</title>
+    <title>{% block title %}APP COSTOS{% endblock %}</title>
     <link href="https://bootswatch.com/4/united/bootstrap.min.css" rel="stylesheet">
     <style>
     .container
@@ -33,11 +33,10 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Stock</a>
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Inventario</a>
                 <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 40px, 0px);">
-                    <a class="dropdown-item" href="{% url 'betaNegocio:cad_stock_listar' %}">Listar Stock</a>
-                    <a class="dropdown-item" href="{% url 'betaNegocio:cad_stock_crear_ingreso' %}">Ingreso de Stock</a>
-                    <a class="dropdown-item" href="{% url 'betaNegocio:cad_stock_crear_salida' %}">Salida de Stock</a>
+                    <a class="dropdown-item" href="{% url 'betaNegocio:cad_stock_listar' %}">Listar Inventario</a>
+                    <a class="dropdown-item" href="{% url 'betaNegocio:cad_stock_crear_salida' %}">Salida de Inventario</a>
                 </div>
             </li>
             <li class="nav-item dropdown">

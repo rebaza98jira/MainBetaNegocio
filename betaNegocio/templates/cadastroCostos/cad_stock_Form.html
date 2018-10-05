@@ -26,7 +26,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script>
      $( document ).ready(function() {
-        $("#id_valor_insumo").attr("disabled","disabled")
         var cantidad_mov = $("#id_cantidad_mov");
         var precio_unitario = $("#id_precio_unitario");
         console.log("YEAHIN111");
@@ -99,7 +98,6 @@
             console.log("Si Hay cadenas");
             $("#id_cod_insumo").attr("disabled","disabled")
             $("#id_fec_movimiento").attr("disabled","disabled")
-            $("#id_num_veces").attr("disabled","disabled")
         }
 
         else{
@@ -119,8 +117,6 @@
     $('Form').submit(function() {
         $('#id_cod_insumo').removeAttr('disabled');
         $('#id_fec_movimiento').removeAttr('disabled');
-        $('#id_num_veces').removeAttr('disabled');
-        $('#id_valor_insumo').removeAttr('disabled');
 
         console.log("HERErerer")
     });

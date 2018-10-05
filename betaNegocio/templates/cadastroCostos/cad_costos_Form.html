@@ -1,27 +1,28 @@
 {% extends 'base/base.html' %}
-
-{% block SUBTITLE %}
-    Salida de Stock
+{% block Head2 %}
 {%endblock%}
 {% block searchList %}
 {% endblock %}
 {% block content %}
 <form method="post">
+    <table >
+        <tr>
+            <td><h2>Salida de Stock</h2><table>{{ form.as_table }}</table></td>
+            <td><h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         </h2></td>
+            <td><h2><br>Estado de Stock<br></h2><table>{{ form2.as_table }}</table></td>
+        </tr>
+    </table>
     {% csrf_token %}
-    <table>{{ form.as_table }}</table>
 
     <br>
-
-    <h2><br>Estado de Stock<br></h2>
-    <table>{{ form2.as_table }}</table>
     <br>
 
-    <button id="GuardarSalida" type="submit" class="btn btn-primary">Guardar</button>
+    <button id="GuardarSalida" name="Guarda_Salida" type="submit" class="btn btn-primary">Guardar</button>
     {% block cancelar %}
         <a id="someIDA" class = "btn btn-secondary" href="{% url 'betaNegocio:cad_costos_listar' %}">Cancelar</a>
     {% endblock %}
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <button id="BajaTotal" type="submit" class="btn btn-primary btn-lg">Baja Total</button>
+    <button id="BajaTotal"name="Baja_Total" type="submit" class="btn btn-primary btn-lg">Baja Total</button>
 
 
 </form>
@@ -30,6 +31,8 @@
 
 {% block scripts%}
     <script>
+     var inicial_cantidad_mov  = $("#id_cantidad_mov").val();
+     var inicial_id_valor_insumo  = $("#id_valor_insumo").val();
      $( document ).ready(function() {
 
         $('#id_cod_insumo_salida').val($("#id_cod_insumo").val());
@@ -107,6 +110,16 @@
             event.preventDefault();
             location.reload();
         };
+
+
+    });
+
+    $('#BajaTotal').on('click', function() {
+        console.log(inicial_cantidad_mov)
+        console.log(inicial_id_valor_insumo)
+        $("#id_cantidad_costo").val(inicial_cantidad_mov)
+        $("#id_valor_costo").val(inicial_id_valor_insumo);
+        location.reload();
 
 
     });

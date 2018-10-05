@@ -175,6 +175,13 @@ class Cad_costos_List(ListView):
     template_name = 'cadastroCostos/cad_costos_List.html'
     paginate_by = 10
 
+    def get_queryset(self):
+        context = Cad_costos.objects.all().order_by('fecha_trabajo')
+        return context
+
+
+
+
 class Cad_costos_Create(CreateView,UpdateView):
     model = Cad_stock
     second_model = Cad_costos
@@ -200,33 +207,51 @@ class Cad_costos_Create(CreateView,UpdateView):
         id_stock = kwargs['pk']
 
         stock = self.model.objects.get(id=id_stock)
+        stock.ind_ing_sal = 'S'
 
-        form = self.form_class(request.POST.copy())
+        form = self.form_class(request.POST)
 
-        print("THIS IS AHONTER DEBUGGGGGGGGG0000000")
-        print(form)
-        print(form['fecha_trabajo'].value())
-        print(form['cod_insumo'].value())
-        print(form['modo_pago_c'].value())
-        print(form['cantidad_costo'].value())
-        print(form['precio_costo'].value())
-        print(form['valor_costo'].value())
 
-        # print(form.data['fecha_trabajo'])
-        try:
-            costo = self.second_model.objects.all().filter(fecha_trabajo=form['fecha_trabajo'].value(), cod_insumo= form['cod_insumo'].value(),modo_pago_c='E').values('cantidad_costo','valor_costo' ).get()
-        except:
-            costo = None
-        # costo = self.second_model.objects.all().filter(fecha_trabajo=form['fecha_trabajo'].value(), cod_insumo= form['cod_insumo'].value(),modo_pago_c=form['modo_pago_c'].value()).values('cantidad_costo','valor_costo' ).get()
-        print("AFTER QUERY")
-        print((costo['cantidad_costo']))
-        print((costo['valor_costo']))
-        print(form.get('modo_pago_c'))
+        costo = self.second_model.objects.all().filter(fecha_trabajo=form['fecha_trabajo'].value(),cod_insumo=form['cod_insumo'].value(),modo_pago_c=form['modo_pago_c'].value()).first()
+        # costo = self.second_model.objects.all().filter(fecha_trabajo=form['fecha_trabajo'].value(), cod_insumo= form['cod_insumo'].value(),modo_pago_c='E')
+        # file_s = Share.objects.filter(shared_user_id=log_id).values_list('files_id', flat=True).order_by('id')
+
+        if(costo):
+            print("Actualiza")
+            costo.cantidad_costo = Decimal(costo.cantidad_costo) + Decimal(form['cantidad_costo'].value())
+            costo.valor_costo = Decimal(costo.valor_costo) + Decimal(form['valor_costo'].value())
+            form = self.second_form_class(request.POST, instance=costo)
+
+        else:
+            print("CREA")
+
+
+        if 'Baja_Total' in request.POST:
+            print("DesdeBotonBAJATOTAL")
+
+            if form.is_valid():
+                form.save()
+                stock.delete()
+                return HttpResponseRedirect(self.get_success_url())
+
+
+
+        form2 = self.second_form_class(request.POST, instance=stock)
+        print("THIS IS AHONTER DEBUGGGGGGGGG")
+        # print(form2)
 
         if form.is_valid() and form2.is_valid():
             form.save()
             form2.save()
             return HttpResponseRedirect(self.get_success_url())
+        else:
+            print("ekse")
+            return HttpResponseRedirect(self.get_success_url())
+
+
+
+
+
 
 
 

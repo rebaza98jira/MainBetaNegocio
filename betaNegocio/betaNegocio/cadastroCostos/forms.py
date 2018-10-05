@@ -83,7 +83,7 @@ class Cad_stock_Form(forms.ModelForm):
             'cantidad_mov',
             'precio_unitario',
             'valor_insumo',
-            'ind_ing_sal',
+            # 'ind_ing_sal',
             'modo_pago_m',
         ]
         labels = {
@@ -93,17 +93,17 @@ class Cad_stock_Form(forms.ModelForm):
             'cantidad_mov': 'Cantidad en Stock',
             'precio_unitario': 'Precio Unitario',
             'valor_insumo': 'Valor de Insumo',
-            'ind_ing_sal': 'Ingreso/Salida',
+            # 'ind_ing_sal': 'Ingreso/Salida',
             'modo_pago_m': 'Modo de Pago',
         }
         widgets = {
             'cod_insumo': forms.Select(attrs={'class': 'js-example-basic-single', 'style': 'width:auto'}),
             'fec_movimiento': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
-            'num_veces': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px'}),
+            'num_veces': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px', 'readonly':'True'}),
             'cantidad_mov': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px'}),
             'precio_unitario': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px'}),
-            'valor_insumo': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px'}),
-            'ind_ing_sal': forms.Select(attrs={'class': 'form-control', 'style': 'width:auto'}),
+            'valor_insumo': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px', 'readonly':'True'}),
+            # 'ind_ing_sal': forms.TextInput(attrs={'class': 'form-control', 'style': 'width:auto', 'readonly':'True'}),
             'modo_pago_m': forms.Select(attrs={'class': 'form-control', 'style': 'width:auto'}),
         }
 

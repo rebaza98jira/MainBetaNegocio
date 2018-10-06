@@ -17,9 +17,9 @@
     <br>
     <br>
 
-    <button id="GuardarSalida" name="Guarda_Salida" type="submit" class="btn btn-primary">Guardar</button>
+    <button id="GuardarSalida" name="Guarda_Salida" type="submit" class="btn btn-primary">Salida Parcial</button>
     {% block cancelar %}
-        <a id="someIDA" class = "btn btn-secondary" href="{% url 'betaNegocio:cad_costos_listar' %}">Cancelar</a>
+        <a id="someIDA" class = "btn btn-secondary" href="{% url 'betaNegocio:cad_stock_salida_listar' %}">Cancelar</a>
     {% endblock %}
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <button id="BajaTotal"name="Baja_Total" type="submit" class="btn btn-primary btn-lg">Baja Total</button>
@@ -34,6 +34,9 @@
      var inicial_cantidad_mov  = $("#id_cantidad_mov").val();
      var inicial_id_valor_insumo  = $("#id_valor_insumo").val();
      $( document ).ready(function() {
+        console.log('ING/SAL')
+        console.log($("#id_ind_ing_sal").val())
+        $('label[for=id_ind_ing_sal], input#id_ind_ing_sal').hide();
 
         $('#id_cod_insumo_salida').val($("#id_cod_insumo").val());
         $('#id_precio_costo').val($("#id_precio_unitario").val());
@@ -111,6 +114,7 @@
             location.reload();
         };
 
+        $("#id_ind_ing_sal").val('S');
 
     });
 

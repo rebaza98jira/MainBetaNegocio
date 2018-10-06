@@ -6,7 +6,7 @@
 {% block searchList %}
 {% endblock %}
 {% block content %}
-<form method="post">
+<form id="formPost" method="post">
     {% csrf_token %}
     <table>{{ form.as_table }}</table>
 

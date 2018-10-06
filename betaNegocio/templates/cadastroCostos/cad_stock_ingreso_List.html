@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %}
 
 {% block SUBTITLE %}
-    Inventario
+    Ingreso de Inventario
 {%endblock%}
 {% block searchList %}
     <br>
@@ -55,7 +55,6 @@
 	</tbody>
 
 </table>
-
 <a class="btn btn-success" href="{% url 'betaNegocio:cad_stock_crear_ingreso' %}">Ingresar</a>
 {% endblock %}
 {% block scripts%}

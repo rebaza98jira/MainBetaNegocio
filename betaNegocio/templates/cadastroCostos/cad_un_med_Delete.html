@@ -6,12 +6,27 @@
     Unidad de Medida
 {%endblock%}
 {% block content %}
-<form method="post">
+<form id="formPost" method="post">
     {% csrf_token %}
-    <h3>¿Desea eliminar el registro de {{ cad_un_med.descripcion }} con Codigo = {{cad_un_med.un_med_insumo }}?</h3>
+    <h3>¿Desea eliminar el registro?</h3>
+    <table>{{ form.as_table }}</table>
+
+    <br>
+
+
     <button class="btn btn-danger" type="submit">Si, eliminar</button>
     <a class = "btn btn-primary" href="{% url 'betaNegocio:cad_un_med_listar' %}">Cancelar</a>
 
 </form>
 
 {% endblock %}
+
+{% block scripts%}
+    <script>
+    $( document ).ready(function() {
+        console.log( "ready!" );
+        $('#formPost :input').attr('readonly','readonly');
+    });
+  </script>
+{% endblock %}
+

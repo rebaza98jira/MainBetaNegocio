@@ -51,10 +51,21 @@ class Cad_un_med_Update(UpdateView):
     template_name = 'cadastroCostos/cad_un_med_Form.html'
     success_url = reverse_lazy('betaNegocio:cad_un_med_listar')
 
-class Cad_un_med_Delete(DeleteView):
+class Cad_un_med_Delete(DeleteView,UpdateView):
     model = Cad_un_med
+    form_class = Cad_un_med_Form
     template_name = 'cadastroCostos/cad_un_med_Delete.html'
     success_url = reverse_lazy('betaNegocio:cad_un_med_listar')
+
+
+    def get(self, request, *args, **kwargs):
+        self.object = None
+        self.form = self.get_form(self.form_class)
+        # Explicitly states what get to call:
+        return DeleteView.get(self, request, *args, **kwargs)
+
+
+
 
 
 class Cad_insumos_List(ListView):
@@ -87,15 +98,24 @@ class Cad_insumos_Update(UpdateView):
     template_name = 'cadastroCostos/cad_insumos_Form.html'
     success_url = reverse_lazy('betaNegocio:cad_insumos_listar')
 
-class Cad_insumos_Delete(DeleteView):
+class Cad_insumos_Delete(DeleteView, UpdateView):
     model = Cad_insumos
+    form_class = Cad_insumos_Form
     template_name = 'cadastroCostos/cad_insumos_Delete.html'
     success_url = reverse_lazy('betaNegocio:cad_insumos_listar')
 
 
-class Cad_stock_List(ListView,UpdateView):
+    def get(self, request, *args, **kwargs):
+        self.object = None
+        self.form = self.get_form(self.form_class)
+        # Explicitly states what get to call:
+        return DeleteView.get(self, request, *args, **kwargs)
+
+
+
+class Cad_stock_Ingresos_List(ListView, UpdateView):
     model = Cad_stock
-    template_name = 'cadastroCostos/cad_stock_List.html'
+    template_name = 'cadastroCostos/cad_stock_ingreso_List.html'
     paginate_by = 10
     form_class = Cad_stock_insumo_Form
 
@@ -122,6 +142,34 @@ class Cad_stock_List(ListView,UpdateView):
 
         return context
 
+class Cad_stock_Salida_List(ListView, UpdateView):
+    model = Cad_stock
+    template_name = 'cadastroCostos/cad_stock_salida_List.html'
+    paginate_by = 10
+    form_class = Cad_stock_insumo_Form
+
+    def get(self, request, *args, **kwargs):
+        self.object = None
+        self.form = self.get_form(self.form_class)
+        # Explicitly states what get to call:
+        return ListView.get(self, request, *args, **kwargs)
+
+    def get_queryset(self):
+        query = self.request.GET.get("cod_insumo")
+        context = Cad_stock.objects.all().order_by('fec_movimiento')
+
+        if query:
+
+            if query.isdigit():
+                context = context.filter(cod_insumo=query)
+            else:
+                context2 = Cad_insumos.objects.filter(nombre_insumo__icontains=query).values_list('cod_insumo',flat=True)
+                context = context.filter(cod_insumo__in=context2)
+            # return context
+        # else:
+        #     context = Cad_stock.objects.all()
+
+        return context
 
 
 
@@ -163,11 +211,17 @@ class Cad_Stock_Update(UpdateView):
     template_name = 'cadastroCostos/cad_stock_Form_Editar.html'
     success_url = reverse_lazy('betaNegocio:cad_stock_listar')
 
-class Cad_stock_Delete(DeleteView):
+class Cad_stock_Delete(DeleteView, UpdateView):
     model = Cad_stock
+    form_class = Cad_stock_Form
     template_name = 'cadastroCostos/cad_stock_Delete.html'
     success_url = reverse_lazy('betaNegocio:cad_stock_listar')
 
+    def get(self, request, *args, **kwargs):
+        self.object = None
+        self.form = self.get_form(self.form_class)
+        # Explicitly states what get to call:
+        return DeleteView.get(self, request, *args, **kwargs)
 
 
 class Cad_costos_List(ListView):
@@ -188,7 +242,7 @@ class Cad_costos_Create(CreateView,UpdateView):
     form_class = Cad_costos_Form
     second_form_class = Cad_stock_Form
     template_name = 'cadastroCostos/cad_costos_Form.html'
-    success_url = reverse_lazy('betaNegocio:cad_stock_listar')
+    success_url = reverse_lazy('betaNegocio:cad_stock_salida_listar')
 
 
     def get_context_data(self, **kwargs):
@@ -207,8 +261,9 @@ class Cad_costos_Create(CreateView,UpdateView):
         id_stock = kwargs['pk']
 
         stock = self.model.objects.get(id=id_stock)
+        print ("DEBUG SALIDA ")
         stock.ind_ing_sal = 'S'
-
+        print (stock.ind_ing_sal)
         form = self.form_class(request.POST)
 
 
@@ -238,7 +293,7 @@ class Cad_costos_Create(CreateView,UpdateView):
 
         form2 = self.second_form_class(request.POST, instance=stock)
         print("THIS IS AHONTER DEBUGGGGGGGGG")
-        # print(form2)
+        print(form2)
 
         if form.is_valid() and form2.is_valid():
             form.save()

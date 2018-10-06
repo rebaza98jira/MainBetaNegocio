@@ -73,6 +73,7 @@ class Cad_insumos_Form(forms.ModelForm):
 
 class Cad_stock_Form(forms.ModelForm):
 
+
     class Meta:
         model = Cad_stock
 
@@ -83,8 +84,9 @@ class Cad_stock_Form(forms.ModelForm):
             'cantidad_mov',
             'precio_unitario',
             'valor_insumo',
-            # 'ind_ing_sal',
             'modo_pago_m',
+            'ind_ing_sal',
+
         ]
         labels = {
             'cod_insumo': 'Codigo',
@@ -93,8 +95,9 @@ class Cad_stock_Form(forms.ModelForm):
             'cantidad_mov': 'Cantidad en Stock',
             'precio_unitario': 'Precio Unitario',
             'valor_insumo': 'Valor de Insumo',
-            # 'ind_ing_sal': 'Ingreso/Salida',
             'modo_pago_m': 'Modo de Pago',
+            'ind_ing_sal': 'Estado',
+
         }
         widgets = {
             'cod_insumo': forms.Select(attrs={'class': 'js-example-basic-single', 'style': 'width:auto'}),
@@ -103,8 +106,8 @@ class Cad_stock_Form(forms.ModelForm):
             'cantidad_mov': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px'}),
             'precio_unitario': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px'}),
             'valor_insumo': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px', 'readonly':'True'}),
-            # 'ind_ing_sal': forms.TextInput(attrs={'class': 'form-control', 'style': 'width:auto', 'readonly':'True'}),
             'modo_pago_m': forms.Select(attrs={'class': 'form-control', 'style': 'width:auto'}),
+            'ind_ing_sal': forms.TextInput(attrs={'class': 'form-control', 'style': 'width:40px', 'readonly': 'True'}),
         }
 
 
@@ -157,25 +160,24 @@ class Cad_costos_Form(forms.ModelForm):
         model = Cad_costos
 
         fields = [
-            'fecha_trabajo',
             'cod_insumo',
+            'fecha_trabajo',
             'cantidad_costo',
             'precio_costo',
             'valor_costo',
             'modo_pago_c',
         ]
         labels = {
-            'fecha_trabajo': 'Fecha de Movimiento',
             'cod_insumo': 'Codigo',
+            'fecha_trabajo': 'Fecha de Movimiento',
             'cantidad_costo': 'Cantidad de Costo',
             'precio_costo': 'Precio de Costo',
             'valor_costo': 'Valor de Costo',
             'modo_pago_c': 'Modo de Pago',
         }
         widgets = {
-            'fecha_trabajo': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
-            # 'cod_insumo': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px', 'id':'id_cod_insumo_salida'}),
             'cod_insumo': forms.Select(attrs={'class': 'js-example-basic-single', 'style': 'width:auto', 'id':'id_cod_insumo_salida'}),
+            'fecha_trabajo': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'cantidad_costo': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px'}),
             'precio_costo': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px'}),
             'valor_costo': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px'}),

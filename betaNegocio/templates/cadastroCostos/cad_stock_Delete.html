@@ -6,11 +6,10 @@
     Ingreso de Inventario
 {%endblock%}
 {% block content %}
-<form method="post">
+<form id="formDelete" method="post">
     {% csrf_token %}
 
     <div id="formdiv">
-        <h3>¿Desea eliminar el registro?</h3>
         <table>{{ form.as_table }}</table>
     </div>
 
@@ -33,5 +32,13 @@
         $.fn.select2.defaults.set( "selectOnClose", "true" );
         $('.js-example-basic-single').select2();
      });
+
+    $('#formDelete').keydown(function (e) {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            console.log("Enter does nothing")
+            return false;
+        }
+    });
   </script>
 {% endblock %}

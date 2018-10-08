@@ -4,7 +4,7 @@
 {% block searchList %}
 {% endblock %}
 {% block content %}
-<form method="post">
+<form id="formPost" method="post">
     <table >
         <tr>
             <td><h2>Salida de Stock</h2><table>{{ form.as_table }}</table></td>
@@ -123,9 +123,16 @@
         console.log(inicial_id_valor_insumo)
         $("#id_cantidad_costo").val(inicial_cantidad_mov)
         $("#id_valor_costo").val(inicial_id_valor_insumo);
-        location.reload();
 
 
+    });
+
+    $('#formPost').keydown(function (e) {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            console.log("Enter does nothing")
+            return false;
+        }
     });
 
     $('Form').submit(function() {

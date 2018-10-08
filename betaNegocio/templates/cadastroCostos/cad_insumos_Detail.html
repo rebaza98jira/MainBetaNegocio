@@ -6,7 +6,7 @@
 {% block searchList %}
 {% endblock %}
 {% block content %}
-<form method="post">
+<form id="formPost" method="post">
     {% csrf_token %}
     <div id="formdiv">
         <table>{{ form.as_table }}</table>
@@ -27,11 +27,23 @@
     $( document ).ready(function() {
          var loc = window.location.href;
          $("#formdiv").find("*").prop("disabled", true);
+
+
          $.fn.select2.defaults.set( "theme", "bootstrap" );
         $.fn.select2.defaults.set( "width", "auto" );
         $.fn.select2.defaults.set( "placeholder", "Seleccione" );
         $.fn.select2.defaults.set( "selectOnClose", "true" );
         $('.js-example-basic-single').select2();
+        $('js-example-basic-single').select2("enable",false)
+
      });
+
+     $('#formPost').keydown(function (e) {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            console.log("Enter does nothing")
+            return false;
+        }
+    });
   </script>
 {% endblock %}

@@ -6,9 +6,8 @@
     Unidad de Medida
 {%endblock%}
 {% block content %}
-<form id="formPost" method="post">
+<form id="formDelete" method="post">
     {% csrf_token %}
-    <h3>¿Desea eliminar el registro?</h3>
     <table>{{ form.as_table }}</table>
 
     <br>
@@ -25,7 +24,14 @@
     <script>
     $( document ).ready(function() {
         console.log( "ready!" );
-        $('#formPost :input').attr('readonly','readonly');
+        $('#formDelete :input').attr('readonly','readonly');
+    });
+    $('#formDelete').keydown(function (e) {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            console.log("Enter does nothing")
+            return false;
+        }
     });
   </script>
 {% endblock %}

@@ -1,7 +1,7 @@
 from django.db.models import Max
 from django import forms
 from datetime import datetime
-from .models import Cad_un_med, Cad_insumos, Cad_stock, Cad_costos
+from .models import Cad_un_med, Cad_insumos, Cad_stock, Cad_costos, Cad_V_mesas
 
 
 
@@ -182,5 +182,32 @@ class Cad_costos_Form(forms.ModelForm):
             'precio_costo': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px'}),
             'valor_costo': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px'}),
             'modo_pago_c': forms.Select(attrs={'class': 'form-control', 'style': 'width:auto'}),
+
+        }
+
+
+
+class Cad_mesas_Form(forms.ModelForm):
+
+    class Meta:
+        model = Cad_V_mesas
+
+        fields = [
+            'fecha_trabajo',
+            'num_mesa',
+            'num_veces',
+            'valor_vendido',
+        ]
+        labels = {
+            'fecha_trabajo': 'Fecha',
+            'num_mesa': '   Mesa',
+            'num_veces': '   Veces',
+            'valor_vendido': 'Valor Vendido',
+        }
+        widgets = {
+            'fecha_trabajo': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'num_mesa': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px'}),
+            'num_veces': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px', 'readonly':'True'}),
+            'valor_vendido': forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:100px'}),
 
         }

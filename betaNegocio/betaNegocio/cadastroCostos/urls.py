@@ -25,6 +25,10 @@ urlpatterns = [
     url('nuevoCosto/(?P<pk>\d+)/$', Cad_costos_Create.as_view(), name='cad_costos_crear'),
     url('eliminarInventario/(?P<pk>\d+)/$', Cad_stock_Delete.as_view(), name='cad_stock_eliminar'),
     url(r'^ajax/valida_siguente_vez_fecha/$', valida_siguente_vez_fecha, name='valida_siguente_vez_fecha'),
+    url('verMesas', Cad_mesas_Ver.as_view(), name='cad_costos_ver_mesas'),
+    url('listarMesas', Cad_mesas_List.as_view(), name='cad_mesas_listar'),
+    url('nuevoMesaIngreso', Cad_mesas_Create.as_view(), name='cad_mesa_crear_ingreso'),
+    url(r'^ajax/valida_siguente_vez_fecha_mesa/$', valida_siguente_vez_fecha_mesa, name='valida_siguente_vez_fecha_mesa'),
 
     # url(r'^unidad/nuevo$', UnidadCreate.as_view(), name='unidad_crear'),
     # url(r'^unidad/listar$', UnidadList.as_view(), name='unidad_listar'),

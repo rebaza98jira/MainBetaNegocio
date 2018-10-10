@@ -1,9 +1,9 @@
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
-from .models import Cad_un_med, Cad_insumos, Cad_stock, Cad_costos
+from .models import Cad_un_med, Cad_insumos, Cad_stock, Cad_costos, Cad_V_mesas
 from django.db.models import Sum, F, ExpressionWrapper, Max
-from .forms import Cad_un_med_Form, Cad_insumos_Form, Cad_stock_Form, Cad_stock_insumo_Form, Cad_costos_Form
-from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
+from .forms import Cad_un_med_Form, Cad_insumos_Form, Cad_stock_Form, Cad_stock_insumo_Form, Cad_costos_Form, Cad_mesas_Form
+from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView, TemplateView
 from django.urls import reverse_lazy
 from decimal import Decimal
 
@@ -320,6 +320,46 @@ def valida_siguente_vez_fecha(request):
 
     data = {
         'numveces': Cad_stock.get_numveces_Fecha(fec_movimiento,cod_insumo)
+    }
+    print("DEBUG AJAXDATA")
+    print (data)
+    return JsonResponse(data)
+
+
+class Cad_mesas_Ver(TemplateView):
+    # template_name = 'cadastroCostos/cad_mesas_ver_mesas.html'
+    template_name = 'cadastroCostos/cad_mesas_ver_mesas.html'
+
+
+class Cad_mesas_List(ListView):
+    model = Cad_V_mesas
+    template_name = 'cadastroCostos/cad_mesas_List.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        context = Cad_V_mesas.objects.all().order_by('fecha_trabajo')
+        return context
+
+
+class Cad_mesas_Create(CreateView):
+    model = Cad_V_mesas
+    form_class = Cad_mesas_Form
+    template_name = 'cadastroCostos/cad_mesas_ingreso_Form.html'
+    success_url = reverse_lazy('betaNegocio:cad_mesas_listar')
+
+
+
+
+def valida_siguente_vez_fecha_mesa(request):
+    print ("AJAX FIRST LINE")
+    fecha_trabajo = request.GET.get('fecha_trabajo', None)
+    num_mesa = request.GET.get('num_mesa', None)
+    print ("DEBUG AJAXEC")
+    print(fecha_trabajo)
+    print(num_mesa)
+
+    data = {
+        'numveces': Cad_V_mesas.get_numveces_Fecha(fecha_trabajo,num_mesa)
     }
     print("DEBUG AJAXDATA")
     print (data)

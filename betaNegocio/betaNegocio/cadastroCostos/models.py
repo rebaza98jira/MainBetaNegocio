@@ -55,8 +55,8 @@ class Cad_stock(models.Model):
     fec_movimiento = models.DateField(default=datetime.now)
     num_veces = models.SmallIntegerField()
     cantidad_mov = models.DecimalField(max_digits=8, decimal_places=2)
-    precio_unitario = models.DecimalField(max_digits=12, decimal_places=4)
-    valor_insumo = models.DecimalField(max_digits=12, decimal_places=4)
+    precio_unitario = models.DecimalField(max_digits=12, decimal_places=2)
+    valor_insumo = models.DecimalField(max_digits=12, decimal_places=2)
     ind_ing_sal_CHOICES = (('I', 'Ingreso'),('S', 'Salida'))
     ind_ing_sal = models.CharField(max_length=1, choices= ind_ing_sal_CHOICES, default = 'I')
     modo_pago_m_CHOICES = (('E', 'Efectivo'), ('T', 'Tarjeta'))
@@ -100,7 +100,7 @@ class Cad_ing_ret(models.Model):
     ind_ing_egr_CHOICES = (('I', 'Ingreso'), ('E', 'Egreso'))
     ind_ing_egr = models.CharField(max_length=1, choices= ind_ing_egr_CHOICES)
     num_veces_i = models.SmallIntegerField()
-    valor_ing_ret = models.DecimalField(max_digits=12, decimal_places=4)
+    valor_ing_ret = models.DecimalField(max_digits=12, decimal_places=2)
     notas = models.CharField(max_length=50, null=True, blank=True)
 
     class Meta:
@@ -112,29 +112,56 @@ class Cad_costos(models.Model):
     modo_pago_c_CHOICES = (('E', 'Efectivo'), ('T', 'Tarjeta'))
     modo_pago_c = models.CharField(max_length=1, choices=modo_pago_c_CHOICES)
     cantidad_costo = models.DecimalField(max_digits=8, decimal_places=2)
-    precio_costo = models.DecimalField(max_digits=12, decimal_places=4)
-    valor_costo = models.DecimalField(max_digits=12, decimal_places=4)
+    precio_costo = models.DecimalField(max_digits=12, decimal_places=2)
+    valor_costo = models.DecimalField(max_digits=12, decimal_places=2)
 
     class Meta:
         # unique_together = ["fecha_trabajo", "cod_insumo"]
         unique_together = ["fecha_trabajo", "cod_insumo", "modo_pago_c"]
 
 class Cad_V_mesas(models.Model):
-    fecha_trabajo = models.DateField()
+    fecha_trabajo = models.DateField(default=datetime.now)
     num_mesa = models.SmallIntegerField()
     num_veces = models.SmallIntegerField()
-    valor_vendido = models.DecimalField(max_digits=12, decimal_places=4)
+    valor_vendido = models.DecimalField(max_digits=12, decimal_places=2)
 
     class Meta:
         unique_together = ["fecha_trabajo", "num_mesa", "num_veces"]
+
+    def get_numveces_Fecha(fecha, nro_mesa):
+        print(fecha)
+        print(type(fecha))
+        print(nro_mesa)
+        print(type(nro_mesa))
+        # data =  Cad_stock.objects.filter(fec_movimiento=fecha, cod_insumo=codigo).exists()
+        if str(fecha) == "" or str(nro_mesa) == "":
+            return 1
+
+        next_numveces = Cad_V_mesas.objects.filter(fecha_trabajo=fecha, num_mesa=nro_mesa).aggregate(Max('num_veces'))
+
+        if next_numveces['num_veces__max'] == None:
+            return 1
+        else:
+            return next_numveces['num_veces__max'] + 1
 
 class Cad_est_finan(models.Model):
     mes_año = models.CharField(primary_key=True, max_length=8, null=False, blank=False)
     fec_inicio = models.DateField()
     fec_final = models.DateField()
-    tot_ingresos = models.DecimalField(max_digits=12, decimal_places=4)
-    tot_costo = models.DecimalField(max_digits=12, decimal_places=4)
-    saldo_finan = models.DecimalField(max_digits=12, decimal_places=4)
+    ingreso_mes = models.DecimalField(max_digits=12, decimal_places=2)
+    ingreso_acum = models.DecimalField(max_digits=12, decimal_places=2)
+    costo_tarjeta_mes = models.DecimalField(max_digits=12, decimal_places=2)
+    costo_efectivo_mes = models.DecimalField(max_digits=12, decimal_places=2)
+    costo_acum = models.DecimalField(max_digits=12, decimal_places=2)
+    res_econom_mes = models.DecimalField(max_digits=12, decimal_places=2)
+    res_econom_acum = models.DecimalField(max_digits=12, decimal_places=2)
+    stock_tarjeta = models.DecimalField(max_digits=12, decimal_places=2)
+    stock_efectivo = models.DecimalField(max_digits=12, decimal_places=2)
+    saldo_caja_mes = models.DecimalField(max_digits=12, decimal_places=2)
+    saldo_caja_acum = models.DecimalField(max_digits=12, decimal_places=2)
+    saldo_caja_neto = models.DecimalField(max_digits=12, decimal_places=2)
+    res_finan_mes = models.DecimalField(max_digits=12, decimal_places=2)
+    res_finan_acum = models.DecimalField(max_digits=12, decimal_places=2)
 
 
 

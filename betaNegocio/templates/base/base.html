@@ -15,6 +15,8 @@
         position: relative;
     }
     </style>
+
+
   </head>
   <body>
 {% block navbar %}
@@ -43,6 +45,13 @@
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Costos</a>
                 <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 40px, 0px);">
                     <a class="dropdown-item" href="{% url 'betaNegocio:cad_costos_listar' %}">Listar Costos</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mesas</a>
+                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 40px, 0px);">
+                    <a class="dropdown-item" href="{% url 'betaNegocio:cad_mesa_crear_ingreso' %}">Ingreso de Mesas</a>
+                    <a class="dropdown-item" href="{% url 'betaNegocio:cad_mesas_listar' %}">Listar Movimientos</a>
                 </div>
             </li>
         </ul>
@@ -102,13 +111,6 @@
 {% block footer %}
 {% endblock%}
 
-      <!--<main role="main" class="container">-->
-      <!--<div class="jumbotron">-->
-        <!--<h1>Navbar example</h1>-->
-        <!--<p class="lead">This example is a quick exercise to illustrate how the top-aligned navbar works. As you scroll, this navbar remains in its original position and moves with the rest of the page.</p>-->
-        <!--<a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">View navbar docs &raquo;</a>-->
-      <!--</div>-->
-    <!--</main>-->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

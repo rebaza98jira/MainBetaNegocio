@@ -4,14 +4,25 @@
 {% block searchList %}
 {% endblock %}
 {% block content %}
+<style>
+    #tableForms{
+        border: 1px solid #ccc;
+        border-radius: 15px;
+        padding: 30px;
+    }
+
+</style>
 <form id="formPost" method="post">
-    <table >
-        <tr>
-            <td><h2>Salida de Stock</h2><table>{{ form.as_table }}</table></td>
-            <td><h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         </h2></td>
-            <td><h2><br>Estado de Stock<br></h2><table>{{ form2.as_table }}</table></td>
-        </tr>
-    </table>
+
+
+
+        <table id="tableForms" >
+            <tr>
+                <td><h2>Salida de Stock</h2><table>{{ form.as_table }}</table></td>
+                <td><h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         </h2></td>
+                <td><h2><br>Estado de Stock<br></h2><table>{{ form2.as_table }}</table></td>
+            </tr>
+        </table>
     {% csrf_token %}
 
     <br>

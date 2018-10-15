@@ -9,13 +9,25 @@
     <meta name="author" content="">
     <title>{% block title %}APP COSTOS{% endblock %}</title>
     <link href="https://bootswatch.com/4/united/bootstrap.min.css" rel="stylesheet">
+{% block styles %}
     <style>
     .container
     {
         position: relative;
     }
-    </style>
 
+    form {
+        box-shadow: 10px 10px 5px grey;
+        border: 1px solid #ccc;
+        border-radius: 15px;
+        padding: 12px;
+    }
+    .table-hover{
+		box-shadow: 10px 10px 5px grey;
+	}
+
+    </style>
+{% endblock %}
 
   </head>
   <body>

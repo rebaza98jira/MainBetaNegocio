@@ -1,54 +1,23 @@
 {% extends 'base/base.html' %}
-
-{% block styles %}
-<style>
-
-
-
-   .pull-right {
-        float: right;
-    }
-
-    #tab_logic_total{
-        box-shadow: 10px 10px 5px grey;
-    }
-
-    #tab_logic{
-        box-shadow: 10px 10px 5px grey;
-    }
-
-</style>
-
-{% endblock %}
-
+<
 {% block SUBTITLE %}
-    Mesas
+     DETALLE
 {%endblock%}
 {% block searchList %}
 {% endblock %}
-
-
-
 {% block content %}
+    <form id="formPost" method="post">
+        {% csrf_token %}
+        <table>{{ form.as_table }}</table>
+
+        <br>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        {% block cancelar %}
+            <a id="someIDA" class = "btn btn-secondary" href="{% url 'betaNegocio:cad_mesas_listar' %}">Cancelar</a>
+        {% endblock %}
 
 
-
-
-<form id="formPost" method="post">
-    {% csrf_token %}
-
-
-
-    <table><tbody>{% for field in form  %}
-    {{ field.errors }}
-    <td><strong>{{ field.label_tag }}</strong></td><td>{{ field }}</td>
-  {% endfor %}</tbody></table>
-
-    <br>
-
-
-
-  <div class="row clearfix">
+         <div class="row clearfix">
     <div class="v l-md-12">
       <table class="table table-bordered table-hover" id="tab_logic">
         <thead>
@@ -64,7 +33,7 @@
         <tbody>
           <tr id='addr0'>
             <td>1</td>
-            <td><select name='productoslc' class="js-example-basic-single"/></td>
+            <td><select  name='productoslc' class="js-example-basic-single"/></td>
             <td><input type="text" name='producto'  placeholder='Nombre de Producto' class="form-control"/></td>
             <td><input type="number" name='cantidad' placeholder='Cantidad' class="form-control qty" step="0" min="0"/></td>
             <td><input type="number" name='precio' placeholder='Precio Unitario' class="form-control price" step="0.00" min="0"/></td>
@@ -81,10 +50,7 @@
       <button type="button" id='delete_row' class="btn btn-outline-danger pull-right">- Quitar</button>
     </div>
   </div>
-
-
-<div id="divLogical" class="pull-right">
-
+<div class="pull-right">
     <div class="row clearfix" style="margin-top:20px">
 
       <table class="table table-bordered table-hover" id="tab_logic_total">
@@ -114,38 +80,57 @@
    <div class="row clearfix">
     <div class="col-md-12">
       <button id="btnGuardar" type="submit" class="btn btn-success">Guardar</button>
-      <a id="someIDA" class = "btn btn-secondary" href="{% url 'betaNegocio:cad_mesas_listar' %}">Cancelar</a>
+      <a id="someIDA2" class = "btn btn-secondary" href="{% url 'betaNegocio:cad_mesas_listar' %}">Cancelar</a>
       <button id='btnDeshacer'type="reset" class="btn btn-warning">Deshacer</button>
 
     </div>
   </div>
   </div>
-</form>
 
+    </form>
 
 {% endblock %}
+
 {% block scripts%}
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-
-
     <script>
+    var data
+    $('#formPost').keydown(function (e) {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            console.log("Enter does nothing")
+            return false;
+        }
+    });
+
     $(document).ready(function(){
         $.fn.select2.defaults.set( "theme", "bootstrap" );
         $.fn.select2.defaults.set( "width", "auto" );
         $.fn.select2.defaults.set( "placeholder", "Seleccione" );
         $.fn.select2.defaults.set( "selectOnClose", "true" );
+
         $('.js-example-basic-single').select2();
         $.ajax({
             url: 'ajax/retorna_insumos_venta/',
-            success: function (data) {
-                console.log("funciono OMG277")
-                console.log(data)
-                $('.js-example-basic-single').html(data);
+            data: {
 
+
+            },
+            success: function (data) {
+                console.log("funciono OMG22")
+                console.log(data)
+                console.log(data.length)
+                $('.js-example-basic-single').html(data)
             }
         });
+    });
+
+
+
+
+
 
 
     $('label[for=id_valor_vendido], input#id_valor_vendido').hide();
@@ -154,30 +139,55 @@
     var num_mesa = $("#id_num_mesa").val();
     $("#id_valor_vendido").val($("#total_amount").val());
 
-      var i=1;
-      $("#add_row").click(function(){b=i-1;
-          $('#addr'+i).html($('#addr'+b).html()).find('td:first-child').html(i+1);
-          $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
+    var i=1;
+    $("#add_row").click(function(){b=i-1;
+        console.log("b")
+        console.log(b)
+        console.log("i")
+        console.log(i)
 
-          i++;
-      });
-      $("#delete_row").click(function(){
+        $('#addr'+i).html($('#addr'+b).html()).find('td:first-child').html(i+1);
+
+
+        $.ajax({
+            url: 'ajax/retorna_insumos_venta/',
+            data: {
+
+
+            },
+            success: function (data) {
+                console.log("funciono OMG22")
+                console.log(data)
+                console.log(data.length)
+                $('#addr'+i).find('select').html(data)
+                console.log(data.length)
+
+            }
+        });
+
+
+
+        $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
+        i++;
+    });
+
+
+    $("#delete_row").click(function(){
           if(i>1){
           $("#addr"+(i-1)).html('');
           i--;
           }
           calc();
-      });
-
-      $('#tab_logic tbody').on('keyup change',function(){
-          calc();
-      });
-      $('#tax').on('keyup change',function(){
-          calc_total();
-      });
-
-
     });
+
+    $('#tab_logic tbody').on('keyup change',function(){
+        calc();
+    });
+    $('#tax').on('keyup change',function(){
+        calc_total();
+    });
+
+
 
 
     $("#id_fecha_trabajo,#id_num_mesa ").bind('keyup change',function(){
@@ -238,7 +248,7 @@
       });
     }
 
-    function calc_total()
+  function calc_total()
     {
       total=0;
       $('.total').each(function() {
@@ -251,4 +261,22 @@
     }
   </script>
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

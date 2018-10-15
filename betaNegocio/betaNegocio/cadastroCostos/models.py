@@ -1,37 +1,141 @@
 from django.db import models
 from django.db.models import Max
 from datetime import datetime
+from django.utils.text import slugify
+from django.db.models.signals import pre_save, post_save
 # Create your models here.
 
 
 
+"""FUNCIONES / METODOS """
+
+def slug_Save(sender, instance, *args, **kwargs):
+    print("DEBUG SLUGG")
+    print(sender)
+    prefix = ''
+    nombre_campo = ''
+    if sender == Cad_un_med:
+        print("SON IGUALES CADMED")
+        prefix = 'unidad'
+        nombre_campo = 'un_med_insumo'
+    if sender == Cad_insumos:
+        print("SON IGUALES Insumos")
+        prefix = 'insumo'
+        nombre_campo = 'cod_insumo'
+    if sender == Cad_stock:
+        print("SON IGUALES CADMED")
+        prefix = 'inventario'
+        nombre_campo = 'id'
+    if sender == Cad_ing_ret:
+        print("SON IGUALES Insumos")
+        prefix = 'caja'
+        nombre_campo = 'id'
+    if sender == Cad_costos:
+        print("SON IGUALES CADMED")
+        prefix = 'costos'
+        nombre_campo = 'id'
+    if sender == Cad_V_mesas:
+        print("SON IGUALES Insumos")
+        prefix = 'mesamov'
+        nombre_campo = 'id'
+    if sender == Cad_est_finan:
+        print("SON IGUALES CADMED")
+        prefix = 'finanzas'
+        nombre_campo = 'id'
+    if sender == Cad_insumos:
+        print("SON IGUALES Insumos")
+        prefix = 'insumo'
+        nombre_campo = 'cod_insumo'
+
+
+
+    if not instance.pk:
+        last_pk = sender.objects.all().aggregate(Max(nombre_campo))
+        slug = ''
+        if last_pk[nombre_campo+'__max'] == None:
+            print("111")
+            slug = slugify(prefix + "-1")
+        else:
+            print("lastpkelse")
+            print (last_pk[nombre_campo+'__max'])
+            slug = slugify(prefix)
+
+            print("222")
+            # object_pk = Cad_un_med.objects.latest('pk')
+            # object_pk = object_pk.pk + 1
+            correlativo =  last_pk[nombre_campo+'__max'] + 1
+            slug = f'{slug}-{correlativo}'
+            print (slug)
+        print("333")
+        instance.slug = slug
+
+
+
+    else:
+        print("444")
+        print (instance.slug)
+        print(f'{prefix}-{instance.pk}')
+        if instance.slug != f'{prefix}-{instance.pk}':
+            print("555")
+            instance.slug = f'{prefix}-{instance.pk}'
+            instance.save()
+
+
+
+
+        # if not instance.slug:
+        #     instance.slug = f'{"insumo"}-{instance.pk}'
+        #     instance.save()
+
+
+"""FIN FUNCIONES / METODOS"""
+
+
+
+
+"""UNIDAD DE MEDIDA"""
 
 
 class Cad_un_med(models.Model):
-    un_med_insumo = models.SmallIntegerField(primary_key= True, null= False, blank= False)
+    un_med_insumo = models.AutoField(primary_key= True, null= False, blank= False)
+    slug = models.SlugField(unique=True)
     descripcion = models.CharField(max_length=8)
 
     def __str__(self):
         return self.descripcion
 
-    def get_nextCodigo(*args ):
-        next_codigo = Cad_un_med.objects.all().aggregate(Max('un_med_insumo'))
-        print(next_codigo['un_med_insumo__max'])
-        if next_codigo['un_med_insumo__max'] == None:
-            return 1
-        else:
-            return next_codigo['un_med_insumo__max'] + 1
+    # def get_nextCodigo(*args ):
+    #     next_codigo = Cad_un_med.objects.all().aggregate(Max('un_med_insumo'))
+    #     print(next_codigo['un_med_insumo__max'])
+    #     if next_codigo['un_med_insumo__max'] == None:
+    #         return 1
+    #     else:
+    #         return next_codigo['un_med_insumo__max'] + 1
 
 
 
+
+
+
+pre_save.connect(slug_Save, sender=Cad_un_med)
+post_save.connect(slug_Save, sender=Cad_un_med)
+
+"""FIN UNIDAD DE MEDIDA"""
+
+
+"""INSUMOS"""
 
 class Cad_insumos(models.Model):
 
 
-    cod_insumo = models.SmallIntegerField(primary_key=True, null=False, blank=False)
+    cod_insumo = models.AutoField(primary_key= True, null= False, blank= False)
+    slug = models.SlugField(unique=True)
     nombre_insumo = models.CharField(max_length=50)
     un_med_insumo = models.ForeignKey(Cad_un_med, null=False, blank=False, on_delete=models.PROTECT)
     fecha_cadastro = models.DateField(default=datetime.now)
+    ind_C_V_A_CHOICES = (('C', 'Consumo'), ('V', 'Venta'), ('A', 'Ambos'))
+    ind_C_V_A = models.CharField(max_length=1, choices= ind_C_V_A_CHOICES, default= 'C')
+    precio_venta = models.DecimalField(max_digits=12, decimal_places=2, blank=True, null=True)
 
     # def __str__(self):
     #     cadena = "{0} -> {1}"
@@ -39,18 +143,28 @@ class Cad_insumos(models.Model):
     def __str__(self):
         return self.nombre_insumo
 
-    def get_nextCodigo(*args):
-        next_codigo = Cad_insumos.objects.all().aggregate(Max('cod_insumo'))
-        print (next_codigo['cod_insumo__max'])
-        if next_codigo['cod_insumo__max'] == None:
-            return 1
-        else:
-            return next_codigo['cod_insumo__max'] + 1
+    # def get_nextCodigo(*args):
+    #     next_codigo = Cad_insumos.objects.all().aggregate(Max('cod_insumo'))
+    #     print (next_codigo['cod_insumo__max'])
+    #     if next_codigo['cod_insumo__max'] == None:
+    #         return 1
+    #     else:
+    #         return next_codigo['cod_insumo__max'] + 1
         # return next_codigo['cod_insumo__max'] + 1
 
 
 
+
+pre_save.connect(slug_Save, sender=Cad_insumos)
+post_save.connect(slug_Save, sender=Cad_insumos)
+
+"""FIN INSUMOS"""
+
+
+"""INVENTARIO"""
+
 class Cad_stock(models.Model):
+    slug = models.SlugField(unique=True)
     cod_insumo = models.ForeignKey(Cad_insumos, null=False, blank=False, on_delete=models.PROTECT)
     fec_movimiento = models.DateField(default=datetime.now)
     num_veces = models.SmallIntegerField()
@@ -93,9 +207,16 @@ class Cad_stock(models.Model):
     #     return "Works"
     #         # next_num_veces['num_veces__max'] + 1
 
+pre_save.connect(slug_Save, sender=Cad_stock)
+post_save.connect(slug_Save, sender=Cad_stock)
 
+"""FIN INVENTARIO"""
+
+
+"""CAJA"""
 
 class Cad_ing_ret(models.Model):
+    slug = models.SlugField(unique=True)
     fecha_trabajo = models.DateField()
     ind_ing_egr_CHOICES = (('I', 'Ingreso'), ('E', 'Egreso'))
     ind_ing_egr = models.CharField(max_length=1, choices= ind_ing_egr_CHOICES)
@@ -106,7 +227,17 @@ class Cad_ing_ret(models.Model):
     class Meta:
         unique_together = ["fecha_trabajo", "ind_ing_egr", "num_veces_i"]
 
+
+pre_save.connect(slug_Save, sender=Cad_ing_ret)
+post_save.connect(slug_Save, sender=Cad_ing_ret)
+
+
+"""FINCAJA"""
+
+"""COSTOS"""
+
 class Cad_costos(models.Model):
+    slug = models.SlugField(unique=True)
     fecha_trabajo =  models.DateField(default=datetime.now)
     cod_insumo = models.ForeignKey(Cad_insumos, null=False, blank=False, on_delete=models.CASCADE)
     modo_pago_c_CHOICES = (('E', 'Efectivo'), ('T', 'Tarjeta'))
@@ -119,7 +250,15 @@ class Cad_costos(models.Model):
         # unique_together = ["fecha_trabajo", "cod_insumo"]
         unique_together = ["fecha_trabajo", "cod_insumo", "modo_pago_c"]
 
+pre_save.connect(slug_Save, sender=Cad_costos)
+post_save.connect(slug_Save, sender=Cad_costos)
+
+"""FIN COSTOS"""
+
+"""MESAS"""
+
 class Cad_V_mesas(models.Model):
+    slug = models.SlugField(unique=True)
     fecha_trabajo = models.DateField(default=datetime.now)
     num_mesa = models.SmallIntegerField()
     num_veces = models.SmallIntegerField()
@@ -144,7 +283,29 @@ class Cad_V_mesas(models.Model):
         else:
             return next_numveces['num_veces__max'] + 1
 
+pre_save.connect(slug_Save, sender=Cad_V_mesas)
+post_save.connect(slug_Save, sender=Cad_V_mesas)
+
+"""FIN MESAS"""
+
+"""MESAS DETALLE"""
+
+class Cad_V_mesas_detalle(models.Model):
+    cabecera = models.ForeignKey(Cad_V_mesas, to_field='slug', blank=False, null=False, on_delete=models.PROTECT)
+    linea = models.SmallIntegerField()
+    # cod_insumo = models.ForeignKey(Cad_insumos, null=False, blank=False, on_delete=models.PROTECT)
+    cantidad_venta = models.SmallIntegerField()
+    precio_venta = models.DecimalField(max_digits=12, decimal_places=2)
+
+
+
+"""FIN MESAS DETALLE"""
+
+
+"""FINANZAS"""
+
 class Cad_est_finan(models.Model):
+    slug = models.SlugField(unique=True)
     mes_año = models.CharField(primary_key=True, max_length=8, null=False, blank=False)
     fec_inicio = models.DateField()
     fec_final = models.DateField()
@@ -163,5 +324,8 @@ class Cad_est_finan(models.Model):
     res_finan_mes = models.DecimalField(max_digits=12, decimal_places=2)
     res_finan_acum = models.DecimalField(max_digits=12, decimal_places=2)
 
+pre_save.connect(slug_Save, sender=Cad_est_finan)
+post_save.connect(slug_Save, sender=Cad_est_finan)
 
+"""FIN FINANZAS"""
 

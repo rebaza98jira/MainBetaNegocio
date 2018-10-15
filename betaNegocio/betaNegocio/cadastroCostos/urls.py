@@ -29,6 +29,8 @@ urlpatterns = [
     url('listarMesas', Cad_mesas_List.as_view(), name='cad_mesas_listar'),
     url('nuevoMesaIngreso', Cad_mesas_Create.as_view(), name='cad_mesa_crear_ingreso'),
     url(r'^ajax/valida_siguente_vez_fecha_mesa/$', valida_siguente_vez_fecha_mesa, name='valida_siguente_vez_fecha_mesa'),
+    url('nuevoMesaDetalleIngreso', Cad_mesas_detalle_Create.as_view(), name='cad_mesa_detalle_crear_ingreso'),
+    url(r'^ajax/retorna_insumos_venta/$', retorna_insumos_venta, name='retorna_insumos_venta'),
 
     # url(r'^unidad/nuevo$', UnidadCreate.as_view(), name='unidad_crear'),
     # url(r'^unidad/listar$', UnidadList.as_view(), name='unidad_listar'),

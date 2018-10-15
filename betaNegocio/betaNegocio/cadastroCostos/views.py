@@ -1,12 +1,14 @@
+from django.core import serializers
+import json
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
-from .models import Cad_un_med, Cad_insumos, Cad_stock, Cad_costos, Cad_V_mesas
+from .models import Cad_un_med, Cad_insumos, Cad_stock, Cad_costos, Cad_V_mesas, Cad_V_mesas_detalle
 from django.db.models import Sum, F, ExpressionWrapper, Max
-from .forms import Cad_un_med_Form, Cad_insumos_Form, Cad_stock_Form, Cad_stock_insumo_Form, Cad_costos_Form, Cad_mesas_Form
+from .forms import Cad_un_med_Form, Cad_insumos_Form, Cad_stock_Form, Cad_stock_insumo_Form, Cad_costos_Form, Cad_mesas_Form, Cad_mesas_detalle_Form
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView, TemplateView
 from django.urls import reverse_lazy
 from decimal import Decimal
-
+import pprint
 # Create your views here.
 
 def index(request):
@@ -258,6 +260,8 @@ class Cad_costos_Create(CreateView,UpdateView):
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object
+        print("SelfOBJECT")
+        print (self.object)
         id_stock = kwargs['pk']
 
         stock = self.model.objects.get(id=id_stock)
@@ -347,6 +351,62 @@ class Cad_mesas_Create(CreateView):
     template_name = 'cadastroCostos/cad_mesas_ingreso_Form.html'
     success_url = reverse_lazy('betaNegocio:cad_mesas_listar')
 
+    def get_context_data(self, **kwargs):
+        context = super(Cad_mesas_Create, self).get_context_data(**kwargs)
+        print("DEBUG CERATE MESAS CONTEXT")
+        print(context)
+
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object
+        print("DEBUG POST CREATE MESAS")
+        form = self.form_class(request.POST)
+        print ("FORM1")
+        print(form)
+
+        print("SELF")
+        print(self)
+        print("REQUEST")
+        print(request.POST)
+        dict_values_detalle = request.POST
+        print ("TYPO YOGA")
+        print (type(dict_values_detalle))
+        print(dict_values_detalle)
+        print ("largo")
+        # dict_ = {k: yogafalme.getlist(k) if len(yogafalme.getlist(k)) > 1 else v for k, v in yogafalme.items()}
+        dict_values_detalle=  dict(dict_values_detalle.lists())
+        print (dict_values_detalle['producto'])
+        print(len(dict_values_detalle['producto']))
+        print(dict_values_detalle['producto'][0])
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            if (len(dict_values_detalle['producto'])) == (len(dict_values_detalle['cantidad'])) and (len(dict_values_detalle['cantidad'])) == (len(dict_values_detalle['precio'])):
+                print ("SIN SON IUGALES 3")
+                # form = self.form_class(request.POST, instance=Cad_V_mesas)
+                cabecera = Cad_V_mesas.objects.all().filter(fecha_trabajo=form['fecha_trabajo'].value(),
+                                                            num_mesa=form['num_mesa'].value(),
+                                                            num_veces=form['num_veces'].value()).first()
+                print("llegacabecera")
+                print (cabecera.slug)
+                linea=1
+                while (linea <= len(dict_values_detalle['producto'])):
+                    detalle = Cad_V_mesas_detalle( cabecera_id=cabecera.slug, linea=linea, cantidad_venta=dict_values_detalle['cantidad'][linea-1], precio_venta=dict_values_detalle['precio'][linea-1])
+                    detalle.save()
+                    linea +=1
+
+            return HttpResponseRedirect(self.get_success_url())
+
+
+
+class Cad_mesas_detalle_Create(CreateView):
+    model = Cad_V_mesas_detalle
+    form_class = Cad_mesas_detalle_Form
+    template_name = 'cadastroCostos/cad_mesas_detalle_ingreso_Form.html'
+    success_url = reverse_lazy('betaNegocio:cad_mesas_listar')
+
+
 
 
 
@@ -364,3 +424,11 @@ def valida_siguente_vez_fecha_mesa(request):
     print("DEBUG AJAXDATA")
     print (data)
     return JsonResponse(data)
+
+
+def retorna_insumos_venta(request):
+    # alim_nutri_id = request.GET.get('alim_nutri')
+    # filtra subnutrientes que no estan linkeados a relacion Alim-Nutri
+    insumos_venta = Cad_insumos.objects.all()
+
+    return render(request, 'cadastroCostos/insumo_select_options.html', {'insumos': insumos_venta})

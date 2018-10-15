@@ -6,9 +6,16 @@
 {% block searchList %}
 {% endblock %}
 {% block content %}
+<style>
+
+    #formdiv{
+
+    }
+
+</style>
 <form method="post">
     {% csrf_token %}
-    <div id="formdiv">
+    <div id="formdiv" class="form-group">
         <table>{{ form.as_table }}</table>
     </div>
     <br>

@@ -21,7 +21,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('betaNegocio/', include(('betaNegocio.cadastroCostos.urls', 'cadastroCostos'), namespace='betaNegocio')),
+    path('betaNegocio/', include(('cadastroCostos.urls', 'cadastroCostos'), namespace='betaNegocio')),
 
 ]
 
